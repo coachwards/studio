@@ -20,14 +20,14 @@ interface QuadrantCardProps {
 }
 
 export function QuadrantCard({ quadrant }: QuadrantCardProps) {
-  const Icon = icons[quadrant.icon as keyof typeof icons] as Icon;
+  const IconComponent = icons[quadrant.icon as keyof typeof icons] as Icon;
 
   return (
     <Card className="flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-card/80 backdrop-blur-sm">
       <CardHeader>
         <div className="flex items-center gap-4">
             <div className="p-3 rounded-xl bg-primary/10">
-                <Icon className="h-6 w-6 text-primary" />
+                <IconComponent className="h-6 w-6 text-primary" />
             </div>
             <CardTitle className="font-headline text-2xl">{quadrant.title}</CardTitle>
         </div>

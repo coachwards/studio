@@ -3,6 +3,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Button } from '../ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import Link from 'next/link';
+import { SwotAnalysisDialog } from '../dashboard/swot-analysis-dialog';
+import { ScanLine } from 'lucide-react';
 
 const Header = () => {
     const userAvatar = PlaceHolderImages.find(image => image.id === 'user-avatar');
@@ -21,6 +23,12 @@ const Header = () => {
                     </Link>
                 </div>
                 <div className="flex flex-1 items-center justify-end space-x-2">
+                    <SwotAnalysisDialog>
+                        <Button variant="outline">
+                            <ScanLine className="mr-2 h-4 w-4" />
+                            SWOT Analysis
+                        </Button>
+                    </SwotAnalysisDialog>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="ghost" className="relative h-10 w-10 rounded-full">

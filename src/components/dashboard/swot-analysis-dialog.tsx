@@ -28,7 +28,7 @@ import {
 import type { SwotAnalysis } from "@/lib/types";
 import { Skeleton } from "../ui/skeleton";
 
-export function SwotAnalysisDialog() {
+export function SwotAnalysisDialog({ children }: { children?: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState("");
   const [blockers, setBlockers] = useState("");
@@ -76,10 +76,12 @@ export function SwotAnalysisDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="w-full max-w-xs">
-          <ScanLine className="mr-2 h-4 w-4" />
-          Generate SWOT Analysis
-        </Button>
+        {children || (
+          <Button variant="outline" className="w-full max-w-xs">
+            <ScanLine className="mr-2 h-4 w-4" />
+            Generate SWOT Analysis
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
