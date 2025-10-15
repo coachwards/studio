@@ -5,6 +5,12 @@
       "description": "User avatar placeholder",
       "imageUrl": "https://picsum.photos/seed/user-avatar/100/100",
       "imageHint": "person portrait"
+    },
+    {
+      "id": "rewards-card",
+      "description": "Rewards card placeholder",
+      "imageUrl": "https://picsum.photos/seed/rewards-card/300/188",
+      "imageHint": "gift card"
     }
   ]
 }

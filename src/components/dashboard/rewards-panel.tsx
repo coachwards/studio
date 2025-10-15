@@ -1,6 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Trophy, Gift } from "lucide-react";
 import { Badge } from "../ui/badge";
+import Image from "next/image";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 const mockRewards = [
     { id: '1', title: 'Completed a 5k Run', quadrant: 'Health', unlocked: true },
@@ -11,6 +13,7 @@ const mockRewards = [
 ];
 
 export function RewardsPanel() {
+    const rewardsCardImage = PlaceHolderImages.find(image => image.id === 'rewards-card');
     return (
         <Card className="flex flex-col h-full transition-all duration-300 hover:shadow-xl bg-card/80 backdrop-blur-sm">
             <CardHeader>
@@ -20,10 +23,26 @@ export function RewardsPanel() {
                 </div>
                 <CardDescription>Achievements you've unlocked by reaching your goals.</CardDescription>
             </CardHeader>
-            <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <CardContent className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="lg:col-span-1 flex flex-col items-center justify-center gap-4 p-6 bg-secondary rounded-lg">
+                    {rewardsCardImage && (
+                        <Image
+                            src={rewardsCardImage.imageUrl}
+                            alt={rewardsCardImage.description}
+                            data-ai-hint={rewardsCardImage.imageHint}
+                            width={300}
+                            height={188}
+                            className="rounded-lg shadow-lg"
+                        />
+                    )}
+                    <div className="text-center">
+                        <p className="font-bold text-lg text-secondary-foreground">Coachwards Rewards</p>
+                        <p className="text-sm text-muted-foreground">Keep completing goals to unlock more!</p>
+                    </div>
+                </div>
+                <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {mockRewards.map(reward => (
-                        <Card key={reward.id} className={`flex flex-col p-4 transition-all duration-300 ${reward.unlocked ? 'bg-secondary' : 'bg-background/40'}`}>
+                        <Card key={reward.id} className={`flex flex-col p-4 transition-all duration-300 ${reward.unlocked ? 'bg-secondary/80' : 'bg-background/40'}`}>
                            <div className="flex items-start gap-4">
                              <div className="p-2 bg-background rounded-lg">
                                 <Gift className={`h-6 w-6 ${reward.unlocked ? 'text-accent' : 'text-muted-foreground'}`} />
