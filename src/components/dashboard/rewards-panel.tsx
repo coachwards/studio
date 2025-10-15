@@ -20,20 +20,22 @@ export function RewardsPanel() {
                 <CardDescription>Achievements you've unlocked by reaching your goals.</CardDescription>
             </CardHeader>
             <CardContent>
-                <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {mockRewards.map(reward => (
-                        <div key={reward.id} className="flex items-center p-3 rounded-lg bg-background/50 hover:bg-secondary/50 transition-colors">
-                            <div className="mr-4">
-                               <Gift className={`h-6 w-6 ${reward.unlocked ? 'text-accent' : 'text-muted-foreground'}`} />
-                            </div>
-                            <div className="flex-1 space-y-1">
+                        <Card key={reward.id} className={`flex flex-col p-4 transition-all duration-300 ${reward.unlocked ? 'bg-secondary' : 'bg-background/40'}`}>
+                           <div className="flex items-start gap-4">
+                             <div className="p-2 bg-background rounded-lg">
+                                <Gift className={`h-6 w-6 ${reward.unlocked ? 'text-accent' : 'text-muted-foreground'}`} />
+                             </div>
+                             <div className="flex-1 space-y-1">
                                 <p className={`font-semibold ${reward.unlocked ? 'text-foreground' : 'text-muted-foreground'}`}>{reward.title}</p>
                                 <Badge variant={reward.unlocked ? "default" : "outline"} className={reward.unlocked ? "border-transparent bg-accent/20 text-accent-foreground" : ""}>
                                     {reward.quadrant}
                                 </Badge>
-                            </div>
-                            {reward.unlocked && <Badge variant="default" className="bg-accent text-accent-foreground hover:bg-accent/90">Unlocked</Badge>}
-                        </div>
+                             </div>
+                             {reward.unlocked && <Badge variant="default" className="bg-accent text-accent-foreground hover:bg-accent/90">Unlocked</Badge>}
+                           </div>
+                        </Card>
                     ))}
                 </div>
             </CardContent>
