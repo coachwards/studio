@@ -7,6 +7,7 @@ const mockRewards = [
     { id: '2', title: 'Saved $500', quadrant: 'Finance', unlocked: true },
     { id: '3', title: 'Connected with 10 new people', quadrant: 'Social', unlocked: false },
     { id: '4', title: 'Finished a certification', quadrant: 'Work', unlocked: false },
+    { id: '5', title: 'Read 5 books this month', quadrant: 'Work', unlocked: true },
 ];
 
 export function RewardsPanel() {
