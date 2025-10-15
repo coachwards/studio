@@ -1,8 +1,7 @@
+"use client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trophy, Gift } from "lucide-react";
+import { Trophy, Gift, Sparkles } from "lucide-react";
 import { Badge } from "../ui/badge";
-import Image from "next/image";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 const mockRewards = [
     { id: '1', title: 'Completed a 5k Run', quadrant: 'Health', unlocked: true },
@@ -13,7 +12,6 @@ const mockRewards = [
 ];
 
 export function RewardsPanel() {
-    const rewardsCardImage = PlaceHolderImages.find(image => image.id === 'rewards-card');
     return (
         <Card className="flex flex-col h-full transition-all duration-300 hover:shadow-xl bg-card/80 backdrop-blur-sm">
             <CardHeader>
@@ -25,17 +23,28 @@ export function RewardsPanel() {
             </CardHeader>
             <CardContent className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-1 flex flex-col items-center justify-center gap-4 p-6 bg-secondary rounded-lg">
-                    {rewardsCardImage && (
-                        <Image
-                            src={rewardsCardImage.imageUrl}
-                            alt={rewardsCardImage.description}
-                            data-ai-hint={rewardsCardImage.imageHint}
-                            width={300}
-                            height={188}
-                            className="rounded-lg shadow-lg"
-                        />
-                    )}
-                    <div className="text-center">
+                    <div className="w-full max-w-[300px] aspect-[1.59/1] rounded-lg bg-gradient-to-br from-primary via-primary to-accent p-6 flex flex-col justify-between text-primary-foreground shadow-2xl">
+                        <div>
+                            <div className="flex justify-between items-start">
+                                <h3 className="font-headline text-xl font-bold">Coachwards</h3>
+                                <Sparkles className="w-6 h-6" />
+                            </div>
+                        </div>
+                        <div className="space-y-4">
+                            <p className="font-mono tracking-widest text-lg">**** **** **** 1234</p>
+                            <div className="flex justify-between text-sm">
+                                <div>
+                                    <p className="opacity-70 text-xs">Card Holder</p>
+                                    <p className="font-medium">USER NAME</p>
+                                </div>
+                                <div>
+                                    <p className="opacity-70 text-xs">Expires</p>
+                                    <p className="font-medium">12/28</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div className="text-center">
                         <p className="font-bold text-lg text-secondary-foreground">Coachwards Rewards</p>
                         <p className="text-sm text-muted-foreground">Keep completing goals to unlock more!</p>
                     </div>
