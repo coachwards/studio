@@ -18,12 +18,10 @@ export type Reward = {
   quadrant: Quadrant['id'];
 };
 
-export type SwotAnalysis = {
-    strengths: string;
-    weaknesses: string;
+export type NextSteps = {
     opportunities: string;
-    threats: string;
-    personalizedInsights: string;
+    targets: string;
+    nextSteps: string;
 }
 
 export type Icon = ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
