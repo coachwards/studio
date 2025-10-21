@@ -192,7 +192,7 @@ export function SwotAnalysisDialog({ children }: { children?: React.ReactNode })
                     <CardTitle>Personalized Insights</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-accent-foreground/80">
+                    <p className="text-sm text-foreground/90">
                       {analysis.personalizedInsights}
                     </p>
                   </CardContent>
