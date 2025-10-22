@@ -51,7 +51,9 @@ const Header = () => {
                                 </div>
                             </DropdownMenuLabel>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>Profile</DropdownMenuItem>
+                            <Link href="/profile">
+                                <DropdownMenuItem>Profile</DropdownMenuItem>
+                            </Link>
                             <DropdownMenuItem>Settings</DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>Log out</DropdownMenuItem>
