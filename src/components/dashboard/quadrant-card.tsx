@@ -16,6 +16,8 @@ import { AddGoalDialog } from "./add-goal-dialog";
 import { GoalItem } from "./goal-item";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 
 interface QuadrantCardProps {
@@ -27,15 +29,24 @@ interface QuadrantCardProps {
 
 export function QuadrantCard({ quadrant, goals, onAddGoal, onToggleGoal }: QuadrantCardProps) {
   const IconComponent = icons[quadrant.icon as keyof typeof icons] as Icon;
+  const coachAvatar = PlaceHolderImages.find(image => image.id === 'coach-avatar');
 
   return (
     <Card className="flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-card/80 backdrop-blur-sm">
       <CardHeader>
-        <div className="flex items-center gap-4">
-            <div className="p-3 rounded-xl bg-primary/10">
-                <IconComponent className="h-6 w-6 text-primary" />
-            </div>
-            <CardTitle className="font-headline text-2xl">{quadrant.title}</CardTitle>
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-center gap-4">
+              <div className="p-3 rounded-xl bg-primary/10">
+                  <IconComponent className="h-6 w-6 text-primary" />
+              </div>
+              <CardTitle className="font-headline text-2xl">{quadrant.title}</CardTitle>
+          </div>
+          <Avatar className="h-10 w-10 border-2 border-primary/50">
+            {coachAvatar && (
+              <AvatarImage src={coachAvatar.imageUrl} alt={coachAvatar.description} data-ai-hint={coachAvatar.imageHint} />
+            )}
+            <AvatarFallback>C</AvatarFallback>
+          </Avatar>
         </div>
         <CardDescription className="pt-2">{quadrant.description}</CardDescription>
       </CardHeader>
