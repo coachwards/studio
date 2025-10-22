@@ -7,8 +7,8 @@ export type Quadrant = {
   id: QuadrantId;
   title: string;
   icon: string;
-  progress: number;
   description: string;
+  progress?: number;
 };
 
 export type Reward = {
@@ -30,6 +30,14 @@ export type SwotAnalysis = {
     opportunities: string;
     threats: string;
     personalizedInsights: string;
+};
+
+export type Goal = {
+  id: string;
+  title: string;
+  description?: string;
+  quadrantId: QuadrantId;
+  completed: boolean;
 };
 
 export type Icon = ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;

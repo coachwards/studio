@@ -21,9 +21,10 @@ import { Plus } from "lucide-react";
 interface AddGoalDialogProps {
   quadrant: Quadrant;
   children?: React.ReactNode;
+  onAddGoal: (title: string, description: string, quadrantId: Quadrant['id']) => void;
 }
 
-export function AddGoalDialog({ quadrant, children }: AddGoalDialogProps) {
+export function AddGoalDialog({ quadrant, children, onAddGoal }: AddGoalDialogProps) {
   const [open, setOpen] = useState(false);
   const [goal, setGoal] = useState("");
   const [description, setDescription] = useState("");
@@ -38,8 +39,7 @@ export function AddGoalDialog({ quadrant, children }: AddGoalDialogProps) {
       });
       return;
     }
-    // Here you would typically save the goal to your backend
-    console.log("Adding goal:", { quadrant: quadrant.id, goal, description });
+    onAddGoal(goal, description, quadrant.id);
     toast({
       title: "Goal Added!",
       description: `Your new goal "${goal}" has been added to the ${quadrant.title} quadrant.`,

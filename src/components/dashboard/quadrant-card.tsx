@@ -7,20 +7,24 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Button } from "@/components/ui/button";
-import type { Quadrant } from "@/lib/types";
+import type { Quadrant, Goal } from "@/lib/types";
 import { GoalDialog } from "./goal-dialog";
 import { Plus } from "lucide-react";
 import * as icons from "lucide-react";
 import type { Icon } from "@/lib/types";
 import { AddGoalDialog } from "./add-goal-dialog";
+import { GoalItem } from "./goal-item";
+import { Separator } from "../ui/separator";
 
 
 interface QuadrantCardProps {
   quadrant: Quadrant;
+  goals: Goal[];
+  onAddGoal: (title: string, description: string, quadrantId: Quadrant['id']) => void;
+  onToggleGoal: (goalId: string) => void;
 }
 
-export function QuadrantCard({ quadrant }: QuadrantCardProps) {
+export function QuadrantCard({ quadrant, goals, onAddGoal, onToggleGoal }: QuadrantCardProps) {
   const IconComponent = icons[quadrant.icon as keyof typeof icons] as Icon;
 
   return (
@@ -34,15 +38,28 @@ export function QuadrantCard({ quadrant }: QuadrantCardProps) {
         </div>
         <CardDescription className="pt-2">{quadrant.description}</CardDescription>
       </CardHeader>
-      <CardContent className="flex-grow">
-        <div className="flex items-center gap-4">
-          <span className="text-sm font-medium text-muted-foreground">{quadrant.progress}%</span>
-          <Progress value={quadrant.progress} className="h-2 flex-1" />
+      <CardContent className="flex-grow space-y-4">
+        <div>
+          <div className="flex items-center gap-4">
+            <span className="text-sm font-medium text-muted-foreground">{Math.round(quadrant.progress)}%</span>
+            <Progress value={quadrant.progress} className="h-2 flex-1" />
+          </div>
         </div>
+        {goals.length > 0 && (
+          <>
+            <Separator />
+            <div className="space-y-2">
+                <h4 className="font-medium text-sm text-foreground/80">Your Goals</h4>
+                {goals.map(goal => (
+                    <GoalItem key={goal.id} goal={goal} onToggle={onToggleGoal} />
+                ))}
+            </div>
+          </>
+        )}
       </CardContent>
-      <CardFooter className="gap-2">
+      <CardFooter className="gap-2 pt-4">
         <GoalDialog quadrant={quadrant} />
-        <AddGoalDialog quadrant={quadrant}>
+        <AddGoalDialog quadrant={quadrant} onAddGoal={onAddGoal}>
             <Button variant="outline" size="sm">
             <Plus className="mr-2 h-4 w-4" /> Add Goal
             </Button>
