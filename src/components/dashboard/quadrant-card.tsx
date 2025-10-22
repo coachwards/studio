@@ -13,6 +13,7 @@ import { GoalDialog } from "./goal-dialog";
 import { Plus } from "lucide-react";
 import * as icons from "lucide-react";
 import type { Icon } from "@/lib/types";
+import { AddGoalDialog } from "./add-goal-dialog";
 
 
 interface QuadrantCardProps {
@@ -41,9 +42,11 @@ export function QuadrantCard({ quadrant }: QuadrantCardProps) {
       </CardContent>
       <CardFooter className="gap-2">
         <GoalDialog quadrant={quadrant} />
-        <Button variant="outline" size="sm">
-          <Plus className="mr-2 h-4 w-4" /> Add Goal
-        </Button>
+        <AddGoalDialog quadrant={quadrant}>
+            <Button variant="outline" size="sm">
+            <Plus className="mr-2 h-4 w-4" /> Add Goal
+            </Button>
+        </AddGoalDialog>
       </CardFooter>
     </Card>
   );

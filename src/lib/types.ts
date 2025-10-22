@@ -24,4 +24,12 @@ export type NextSteps = {
     nextSteps: string;
 }
 
+export type SwotAnalysis = {
+    strengths: string;
+    weaknesses: string;
+    opportunities: string;
+    threats: string;
+    personalizedInsights: string;
+};
+
 export type Icon = ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
