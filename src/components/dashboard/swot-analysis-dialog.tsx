@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { generateSWOAnalysis } from "@/ai/flows/generate-swo-analysis";
+import { generateSWOAnalysis } from "@/ai/flows/generate-swot-analysis";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import {
