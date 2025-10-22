@@ -162,7 +162,7 @@ export function NextStepsDialog({ children }: { children?: React.ReactNode }) {
                     <CardTitle>Suggested Next Steps</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-accent-foreground/90">
+                    <p className="text-sm text-foreground/90">
                       {analysis.nextSteps}
                     </p>
                   </CardContent>
