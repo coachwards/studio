@@ -15,6 +15,7 @@ import type { Icon } from "@/lib/types";
 import { AddGoalDialog } from "./add-goal-dialog";
 import { GoalItem } from "./goal-item";
 import { Separator } from "../ui/separator";
+import { Button } from "../ui/button";
 
 
 interface QuadrantCardProps {
