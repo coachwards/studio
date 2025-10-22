@@ -27,7 +27,7 @@ const Header = () => {
                     <SwotAnalysisDialog>
                         <Button>
                             <ScanLine className="mr-2 h-4 w-4" />
-                            SWO Analysis
+                            User Analysis
                         </Button>
                     </SwotAnalysisDialog>
                     <DropdownMenu>
