@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Button } from '../ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import Link from 'next/link';
-import { NextStepsDialog } from '../dashboard/next-steps-dialog';
+import { SwotAnalysisDialog } from '../dashboard/swot-analysis-dialog';
 import { Bot, ScanLine } from 'lucide-react';
 
 const Header = () => {
@@ -24,12 +24,12 @@ const Header = () => {
                     <span className="text-sm text-muted-foreground hidden md:inline-block">Your Life, Rewarded</span>
                 </div>
                 <div className="flex flex-1 items-center justify-end space-x-2">
-                    <NextStepsDialog>
+                    <SwotAnalysisDialog>
                         <Button>
                             <ScanLine className="mr-2 h-4 w-4" />
-                            SWOT Analysis
+                            SWO Analysis
                         </Button>
-                    </NextStepsDialog>
+                    </SwotAnalysisDialog>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="ghost" className="relative h-10 w-10 rounded-full">

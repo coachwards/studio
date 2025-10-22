@@ -1,68 +1,65 @@
 'use server';
 
 /**
- * @fileOverview SWOT analysis AI agent.
+ * @fileOverview SWO analysis AI agent.
  *
- * - generateSWOTAnalysis - A function that handles the SWOT analysis process.
- * - GenerateSWOTAnalysisInput - The input type for the generateSWOTAnalysis function.
- * - GenerateSWOTAnalysisOutput - The return type for the generateSWOTAnalysis function.
+ * - generateSWOAnalysis - A function that handles the SWO analysis process.
+ * - GenerateSWOAnalysisInput - The input type for the generateSWOAnalysis function.
+ * - GenerateSWOAnalysisOutput - The return type for the generateSWOAnalysis function.
  */
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
-const GenerateSWOTAnalysisInputSchema = z.object({
-  userData: z
+const GenerateSWOAnalysisInputSchema = z.object({
+  strengths: z
     .string()
     .describe(
-      'User data including goals and targets in health, social, finance, and work quadrants.'
+      'User\'s strengths and recent accomplishments.'
     ),
-  blockers: z.string().describe('Current blockers and impediments the user is facing.'),
+  wants: z.string().describe('What the user wants to achieve or change.'),
 });
-export type GenerateSWOTAnalysisInput = z.infer<typeof GenerateSWOTAnalysisInputSchema>;
+export type GenerateSWOAnalysisInput = z.infer<typeof GenerateSWOAnalysisInputSchema>;
 
-const GenerateSWOTAnalysisOutputSchema = z.object({
-  strengths: z.string().describe('Strengths identified in the SWOT analysis.'),
-  weaknesses: z.string().describe('Weaknesses identified in the SWOT analysis.'),
-  opportunities: z.string().describe('Opportunities identified in the SWOT analysis.'),
-  threats: z.string().describe('Threats identified in the SWOT analysis.'),
+const GenerateSWOAnalysisOutputSchema = z.object({
+  opportunities: z.string().describe('Opportunities identified in the SWO analysis.'),
+  targets: z.string().describe('Specific, actionable targets based on the analysis.'),
   personalizedInsights: z
     .string()
-    .describe('Personalized insights based on the SWOT analysis.'),
+    .describe('Personalized insights based on the SWO analysis.'),
 });
-export type GenerateSWOTAnalysisOutput = z.infer<typeof GenerateSWOTAnalysisOutputSchema>;
+export type GenerateSWOAnalysisOutput = z.infer<typeof GenerateSWOAnalysisOutputSchema>;
 
-export async function generateSWOTAnalysis(
-  input: GenerateSWOTAnalysisInput
-): Promise<GenerateSWOTAnalysisOutput> {
-  return generateSWOTAnalysisFlow(input);
+export async function generateSWOAnalysis(
+  input: GenerateSWOAnalysisInput
+): Promise<GenerateSWOAnalysisOutput> {
+  return generateSWOAnalysisFlow(input);
 }
 
 const prompt = ai.definePrompt({
-  name: 'generateSWOTAnalysisPrompt',
-  input: {schema: GenerateSWOTAnalysisInputSchema},
-  output: {schema: GenerateSWOTAnalysisOutputSchema},
-  prompt: `You are an AI coach that helps users perform SWOT analysis on their life.
+  name: 'generateSWOAnalysisPrompt',
+  input: {schema: GenerateSWOAnalysisInputSchema},
+  output: {schema: GenerateSWOAnalysisOutputSchema},
+  prompt: `You are an AI coach that helps users perform a SWO analysis (Strengths, Wants, Opportunities).
 
-  Analyze the user's current situation based on the following information, including their goals, targets, blockers, and impediments. Provide personalized insights and advice.
+  Analyze the user's situation based on their strengths and wants. Provide personalized insights, identify opportunities, and suggest actionable targets.
 
-  User Data: {{{userData}}}
-  Blockers and Impediments: {{{blockers}}}
+  Strengths: {{{strengths}}}
+  Wants: {{{wants}}}
 
-  Consider the following quadrants: Health, Social, Finance, and Work.
-
-  Identify strengths, weaknesses, opportunities, and threats based on the provided information.
-
-  Provide personalized insights based on the SWOT analysis.
+  Based on this, provide the following:
+  - Opportunities: What are the potential opportunities for growth or improvement?
+  - Targets: What are some specific, measurable, achievable, relevant, and time-bound (SMART) targets?
+  - Personalized Insights: Provide personalized advice based on the analysis.
 
   Format the output in a structured JSON format.`,
 });
 
-const generateSWOTAnalysisFlow = ai.defineFlow(
+const generateSWOAnalysisFlow = ai.defineFlow(
   {
-    name: 'generateSWOTAnalysisFlow',
-    inputSchema: GenerateSWOTAnalysisInputSchema,
-    outputSchema: GenerateSWOTAnalysisOutputSchema,
+    name: 'generateSWOAnalysisFlow',
+    inputSchema: GenerateSWOAnalysisInputSchema,
+    outputSchema: GenerateSWOAnalysisOutputSchema,
   },
   async input => {
     const {output} = await prompt(input);

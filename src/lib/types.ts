@@ -32,6 +32,12 @@ export type SwotAnalysis = {
     personalizedInsights: string;
 };
 
+export type SwoAnalysis = {
+    opportunities: string;
+    targets: string;
+    personalizedInsights: string;
+};
+
 export type Goal = {
   id: string;
   title: string;

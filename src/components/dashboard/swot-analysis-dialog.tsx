@@ -13,35 +13,33 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { generateSWOTAnalysis } from "@/ai/flows/generate-swot-analysis";
+import { generateSWOAnalysis } from "@/ai/flows/generate-swo-analysis";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import {
   ScanLine,
   Sparkles,
   Lightbulb,
-  ShieldAlert,
   Zap,
   Target,
-  CloudRain,
 } from "lucide-react";
-import type { SwotAnalysis } from "@/lib/types";
+import type { SwoAnalysis } from "@/lib/types";
 import { Skeleton } from "../ui/skeleton";
 
 export function SwotAnalysisDialog({ children }: { children?: React.ReactNode }) {
   const [open, setOpen] = useState(false);
-  const [userData, setUserData] = useState("");
-  const [blockers, setBlockers] = useState("");
-  const [analysis, setAnalysis] = useState<SwotAnalysis | null>(null);
+  const [strengths, setStrengths] = useState("");
+  const [wants, setWants] = useState("");
+  const [analysis, setAnalysis] = useState<SwoAnalysis | null>(null);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
   const handleGenerateAnalysis = async () => {
-    if (!userData.trim() || !blockers.trim()) {
+    if (!strengths.trim() || !wants.trim()) {
       toast({
         title: "Input required",
         description:
-          "Please fill out both your current situation and your blockers.",
+          "Please describe your strengths and what you want to achieve.",
         variant: "destructive",
       });
       return;
@@ -51,7 +49,7 @@ export function SwotAnalysisDialog({ children }: { children?: React.ReactNode })
     setAnalysis(null);
 
     try {
-      const result = await generateSWOTAnalysis({ userData, blockers });
+      const result = await generateSWOAnalysis({ strengths, wants });
       if (result) {
         setAnalysis(result);
       } else {
@@ -62,10 +60,10 @@ export function SwotAnalysisDialog({ children }: { children?: React.ReactNode })
         });
       }
     } catch (error) {
-      console.error("Error generating SWOT analysis:", error);
+      console.error("Error generating SWO analysis:", error);
       toast({
         title: "Error",
-        description: "Failed to generate SWOT analysis. Please try again later.",
+        description: "Failed to generate analysis. Please try again later.",
         variant: "destructive",
       });
     } finally {
@@ -79,39 +77,38 @@ export function SwotAnalysisDialog({ children }: { children?: React.ReactNode })
         {children || (
           <Button variant="outline" className="w-full max-w-xs">
             <ScanLine className="mr-2 h-4 w-4" />
-            Generate SWOT Analysis
+            Generate SWO Analysis
           </Button>
         )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="font-headline text-2xl">
-            AI-Powered SWOT Analysis
+            AI-Powered SWO Analysis
           </DialogTitle>
           <DialogDescription>
-            Reflect on your life across all quadrants. The AI will identify your
-            Strengths, Weaknesses, Opportunities, and Threats.
+            Reflect on your strengths and wants. The AI will identify Opportunities and suggest Targets.
           </DialogDescription>
         </DialogHeader>
         <div className="grid md:grid-cols-2 gap-6 py-4">
           <div className="space-y-4">
             <div className="grid w-full gap-1.5">
-              <Label htmlFor="user-data">Your Current Situation</Label>
+              <Label htmlFor="strengths">Your Strengths (S)</Label>
               <Textarea
-                placeholder="Describe your goals, targets, and recent activities in health, work, finance, and social life."
-                id="user-data"
-                value={userData}
-                onChange={(e) => setUserData(e.target.value)}
+                placeholder="What are you good at? What are your recent accomplishments?"
+                id="strengths"
+                value={strengths}
+                onChange={(e) => setStrengths(e.target.value)}
                 rows={5}
               />
             </div>
             <div className="grid w-full gap-1.5">
-              <Label htmlFor="blockers">Blockers & Impediments</Label>
+              <Label htmlFor="wants">What You Want (W)</Label>
               <Textarea
-                placeholder="What's holding you back? e.g., 'Procrastination', 'Lack of funds', 'Not enough time'"
-                id="blockers"
-                value={blockers}
-                onChange={(e) => setBlockers(e.target.value)}
+                placeholder="What are your goals? What do you want to change or achieve?"
+                id="wants"
+                value={wants}
+                onChange={(e) => setWants(e.target.value)}
                 rows={3}
               />
             </div>
@@ -128,7 +125,7 @@ export function SwotAnalysisDialog({ children }: { children?: React.ReactNode })
           <div className="space-y-4">
             {loading && (
               <div className="space-y-4">
-                {[...Array(4)].map((_, i) => (
+                {[...Array(3)].map((_, i) => (
                     <Card key={i}>
                         <CardHeader>
                             <Skeleton className="h-6 w-1/2" />
@@ -144,30 +141,8 @@ export function SwotAnalysisDialog({ children }: { children?: React.ReactNode })
               <div className="space-y-4 animate-in fade-in duration-500">
                 <Card>
                   <CardHeader className="flex-row items-center gap-4 space-y-0">
-                    <Target className="w-6 h-6 text-primary" />
-                    <CardTitle>Strengths</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                      {analysis.strengths}
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader className="flex-row items-center gap-4 space-y-0">
-                    <ShieldAlert className="w-6 h-6 text-destructive" />
-                    <CardTitle>Weaknesses</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                      {analysis.weaknesses}
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader className="flex-row items-center gap-4 space-y-0">
                     <Zap className="w-6 h-6 text-accent" />
-                    <CardTitle>Opportunities</CardTitle>
+                    <CardTitle>Opportunities (O)</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground">
@@ -177,12 +152,12 @@ export function SwotAnalysisDialog({ children }: { children?: React.ReactNode })
                 </Card>
                 <Card>
                   <CardHeader className="flex-row items-center gap-4 space-y-0">
-                    <CloudRain className="w-6 h-6 text-muted-foreground" />
-                    <CardTitle>Threats</CardTitle>
+                    <Target className="w-6 h-6 text-primary" />
+                    <CardTitle>Targets (T)</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground">
-                      {analysis.threats}
+                      {analysis.targets}
                     </p>
                   </CardContent>
                 </Card>
