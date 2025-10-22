@@ -4,7 +4,7 @@ import { Button } from '../ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import Link from 'next/link';
 import { NextStepsDialog } from '../dashboard/next-steps-dialog';
-import { Bot } from 'lucide-react';
+import { Bot, ScanLine } from 'lucide-react';
 
 const Header = () => {
     const userAvatar = PlaceHolderImages.find(image => image.id === 'user-avatar');
@@ -24,9 +24,9 @@ const Header = () => {
                 </div>
                 <div className="flex flex-1 items-center justify-end space-x-2">
                     <NextStepsDialog>
-                        <Button variant="outline">
-                            <Bot className="mr-2 h-4 w-4" />
-                            Suggest Next Steps
+                        <Button>
+                            <ScanLine className="mr-2 h-4 w-4" />
+                            SWOT Analysis
                         </Button>
                     </NextStepsDialog>
                     <DropdownMenu>
