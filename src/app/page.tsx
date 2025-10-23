@@ -16,12 +16,12 @@ const initialQuadrants: Quadrant[] = [
 ];
 
 const mockGoals: Goal[] = [
-    { id: '1', title: 'Run a 5k', quadrantId: 'health', completed: true },
-    { id: '2', title: 'Meditate 10 minutes daily', quadrantId: 'health', completed: false },
-    { id: '3', title: 'Finish the Next.js course', quadrantId: 'work', completed: false },
-    { id: '4', title: 'Update my portfolio', quadrantId: 'work', completed: false },
-    { id: '5', title: 'Create a monthly budget', quadrantId: 'finance', completed: true },
-    { id: '6', title: 'Call a friend this week', quadrantId: 'social', completed: false },
+    { id: '1', title: 'Run a 5k', quadrantId: 'health', completed: true, createdAt: '2024-05-10T10:00:00Z' },
+    { id: '2', title: 'Meditate 10 minutes daily', quadrantId: 'health', completed: false, createdAt: '2024-05-15T11:00:00Z' },
+    { id: '3', title: 'Finish the Next.js course', quadrantId: 'work', completed: false, createdAt: '2024-05-20T14:30:00Z' },
+    { id: '4', title: 'Update my portfolio', quadrantId: 'work', completed: false, createdAt: '2024-05-22T16:00:00Z' },
+    { id: '5', title: 'Create a monthly budget', quadrantId: 'finance', completed: true, createdAt: '2024-05-01T09:00:00Z' },
+    { id: '6', title: 'Call a friend this week', quadrantId: 'social', completed: false, createdAt: '2024-05-25T18:00:00Z' },
 ];
 
 
@@ -35,6 +35,7 @@ export default function DashboardPage() {
             description,
             quadrantId,
             completed: false,
+            createdAt: new Date().toISOString(),
         };
         setGoals(prev => [...prev, newGoal]);
     };

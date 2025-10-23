@@ -24,14 +24,6 @@ export type NextSteps = {
     nextSteps: string;
 }
 
-export type SwotAnalysis = {
-    strengths: string;
-    weaknesses: string;
-    opportunities: string;
-    threats: string;
-    personalizedInsights: string;
-};
-
 export type SwoAnalysis = {
     opportunities: string;
     targets: string;
@@ -44,6 +36,7 @@ export type Goal = {
   description?: string;
   quadrantId: QuadrantId;
   completed: boolean;
+  createdAt?: string;
 };
 
 export type Icon = ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;

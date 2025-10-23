@@ -3,6 +3,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Button } from '../ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import Link from 'next/link';
+import { SwotAnalysisDialog } from '../dashboard/swot-analysis-dialog';
+import { ScanLine } from 'lucide-react';
 
 const Header = () => {
     const userAvatar = PlaceHolderImages.find(image => image.id === 'user-avatar');
@@ -45,6 +47,9 @@ const Header = () => {
                             <DropdownMenuSeparator />
                             <Link href="/profile">
                                 <DropdownMenuItem>Profile</DropdownMenuItem>
+                            </Link>
+                             <Link href="/journal">
+                                <DropdownMenuItem>Journal</DropdownMenuItem>
                             </Link>
                             <DropdownMenuItem>Settings</DropdownMenuItem>
                             <DropdownMenuSeparator />
