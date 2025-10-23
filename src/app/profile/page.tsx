@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { Linkedin, Facebook, Instagram } from "lucide-react";
 
 export default function ProfilePage() {
   const userAvatar = PlaceHolderImages.find(image => image.id === 'user-avatar');
@@ -30,14 +31,33 @@ export default function ProfilePage() {
                 </Avatar>
                 <Button variant="outline">Change Photo</Button>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" defaultValue="User" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Name</Label>
+                  <Input id="name" defaultValue="User" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input id="email" type="email" defaultValue="user@example.com" />
+                </div>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" defaultValue="user@example.com" />
+              
+              <div className="space-y-4">
+                <Label>Social Handles</Label>
+                <div className="relative">
+                  <Linkedin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <Input id="linkedin" placeholder="https://linkedin.com/in/..." className="pl-10" />
+                </div>
+                <div className="relative">
+                  <Facebook className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <Input id="facebook" placeholder="https://facebook.com/..." className="pl-10" />
+                </div>
+                <div className="relative">
+                  <Instagram className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <Input id="instagram" placeholder="https://instagram.com/..." className="pl-10" />
+                </div>
               </div>
+
               <Button type="submit">Save Changes</Button>
             </form>
           </CardContent>
