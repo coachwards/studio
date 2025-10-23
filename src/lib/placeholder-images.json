@@ -11,6 +11,24 @@
       "description": "Coach avatar placeholder",
       "imageUrl": "https://images.unsplash.com/photo-1655249493799-9cee4fe983bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwcm9mZXNzaW9uYWwlMjBwZXJzb258ZW58MHx8fHwxNzYxMDk1MjY5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "professional person"
+    },
+    {
+      "id": "coach-1-avatar",
+      "description": "Suggested coach Alex Morgan",
+      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjB3b21hbnxlbnwwfHx8fDE3NjEyNzM4ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "professional woman"
+    },
+    {
+      "id": "coach-2-avatar",
+      "description": "Suggested coach Samantha Lee",
+      "imageUrl": "https://images.unsplash.com/photo-1580894732444-84cf7b6a4388?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxoZWFsdGglMjBjb2FjaHxlbnwwfHx8fDE3NjEyNzQwMDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "health coach"
+    },
+    {
+      "id": "coach-3-avatar",
+      "description": "Suggested coach Michael Chen",
+      "imageUrl": "https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtYWxlJTIwY29hY2h8ZW58MHx8fHwxNzYxMjczOTY5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "male coach"
     }
   ]
 }
