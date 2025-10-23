@@ -37,6 +37,7 @@ export type Goal = {
   quadrantId: QuadrantId;
   completed: boolean;
   createdAt?: string;
+  coachFeedback?: string;
 };
 
 export type Icon = ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;

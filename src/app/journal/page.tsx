@@ -5,17 +5,19 @@ import { Badge } from "@/components/ui/badge";
 import type { Goal } from "@/lib/types";
 import { format } from 'date-fns';
 import { CheckCircle2, Circle } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
 
-// Mock data, including createdAt property
+// Mock data, including createdAt and coachFeedback properties
 const mockGoals: Goal[] = [
-    { id: '1', title: 'Run a 5k', quadrantId: 'health', completed: true, createdAt: '2024-05-10T10:00:00Z' },
+    { id: '1', title: 'Run a 5k', quadrantId: 'health', completed: true, createdAt: '2024-05-10T10:00:00Z', coachFeedback: "Great job completing this! Remember to stretch and stay hydrated for your next run." },
     { id: '2', title: 'Meditate 10 minutes daily', quadrantId: 'health', completed: false, createdAt: '2024-05-15T11:00:00Z' },
-    { id: '3', title: 'Finish the Next.js course', quadrantId: 'work', completed: false, createdAt: '2024-05-20T14:30:00Z' },
+    { id: '3', title: 'Finish the Next.js course', quadrantId: 'work', completed: false, createdAt: '2024-05-20T14:30:00Z', coachFeedback: "You're making steady progress. Try to block out specific times in your calendar to focus on the remaining modules." },
     { id: '4', title: 'Update my portfolio', quadrantId: 'work', completed: false, createdAt: '2024-05-22T16:00:00Z' },
-    { id: '5', title: 'Create a monthly budget', quadrantId: 'finance', completed: true, createdAt: '2024-05-01T09:00:00Z' },
+    { id: '5', title: 'Create a monthly budget', quadrantId: 'finance', completed: true, createdAt: '2024-05-01T09:00:00Z', coachFeedback: "Excellent work on setting up your budget. The next step is to review it weekly to stay on track." },
     { id: '6', title: 'Call a friend this week', quadrantId: 'social', completed: false, createdAt: '2024-05-25T18:00:00Z' },
     { id: '7', title: 'Read a book on investing', quadrantId: 'finance', completed: true, createdAt: '2024-04-20T12:00:00Z' },
-    { id: '8', title: 'Attend a local meetup', quadrantId: 'social', completed: true, createdAt: '2024-04-28T19:00:00Z' },
+    { id: '8', title: 'Attend a local meetup', quadrantId: 'social', completed: true, createdAt: '2024-04-28T19:00:00Z', coachFeedback: "Stepping out of your comfort zone is a huge win. What did you learn from the experience?" },
 ];
 
 const quadrantColors: { [key: string]: string } = {
@@ -26,6 +28,7 @@ const quadrantColors: { [key: string]: string } = {
 };
 
 export default function JournalPage() {
+  const coachAvatar = PlaceHolderImages.find(image => image.id === 'coach-avatar');
   // Group goals by date
   const groupedGoals = mockGoals
     .sort((a, b) => new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime())
@@ -55,21 +58,37 @@ export default function JournalPage() {
                 </h3>
                 <div className="space-y-4">
                   {groupedGoals[date].map(goal => (
-                    <div key={goal.id} className="flex items-start gap-4 p-4 rounded-lg border bg-card/50">
-                       <div className="flex-shrink-0 mt-1">
-                        {goal.completed ? (
-                            <CheckCircle2 className="h-5 w-5 text-green-500" />
-                        ) : (
-                            <Circle className="h-5 w-5 text-muted-foreground" />
-                        )}
+                    <div key={goal.id} className="flex flex-col gap-2 p-4 rounded-lg border bg-card/50">
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0 mt-1">
+                          {goal.completed ? (
+                              <CheckCircle2 className="h-5 w-5 text-green-500" />
+                          ) : (
+                              <Circle className="h-5 w-5 text-muted-foreground" />
+                          )}
+                          </div>
+                        <div className="flex-grow">
+                          <p className={`font-medium ${goal.completed ? 'line-through text-muted-foreground' : 'text-foreground'}`}>
+                            {goal.title}
+                          </p>
+                           <p className="text-sm text-muted-foreground">{goal.description}</p>
                         </div>
-                      <div className="flex-grow">
-                        <p className={`font-medium ${goal.completed ? 'line-through text-muted-foreground' : 'text-foreground'}`}>
-                          {goal.title}
-                        </p>
-                         <p className="text-sm text-muted-foreground">{goal.description}</p>
+                        <Badge className={`${quadrantColors[goal.quadrantId]}`}>{goal.quadrantId.charAt(0).toUpperCase() + goal.quadrantId.slice(1)}</Badge>
                       </div>
-                      <Badge className={`${quadrantColors[goal.quadrantId]}`}>{goal.quadrantId.charAt(0).toUpperCase() + goal.quadrantId.slice(1)}</Badge>
+                      {goal.coachFeedback && (
+                        <div className="mt-2 ml-9 p-3 rounded-md bg-secondary/50 flex items-start gap-3">
+                          <Avatar className="h-8 w-8 border-2 border-primary/50">
+                            {coachAvatar && (
+                              <AvatarImage src={coachAvatar.imageUrl} alt={coachAvatar.description} data-ai-hint={coachAvatar.imageHint} />
+                            )}
+                            <AvatarFallback>C</AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1">
+                            <p className="text-sm font-semibold text-secondary-foreground">Coach Feedback</p>
+                            <p className="text-sm text-muted-foreground">{goal.coachFeedback}</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
