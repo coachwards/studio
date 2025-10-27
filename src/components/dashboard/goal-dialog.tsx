@@ -15,7 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { provideAIDrivenGoalSuggestions } from "@/ai/flows/provide-ai-driven-goal-suggestions";
 import type { Quadrant } from "@/lib/types";
-import { Sparkles } from "lucide-react";
+import { Sparkles, PlusCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
@@ -26,9 +26,10 @@ interface BrandedGoal {
 }
 interface GoalDialogProps {
   quadrant: Quadrant;
+  onAddGoal: (title: string, description: string, quadrantId: Quadrant['id'], brand?: string) => void;
 }
 
-export function GoalDialog({ quadrant }: GoalDialogProps) {
+export function GoalDialog({ quadrant, onAddGoal }: GoalDialogProps) {
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState("");
   const [suggestions, setSuggestions] = useState<BrandedGoal[]>([]);
@@ -82,6 +83,16 @@ export function GoalDialog({ quadrant }: GoalDialogProps) {
     }
   };
 
+  const handleAddSuggestedGoal = (suggestion: BrandedGoal) => {
+    onAddGoal(suggestion.goal, "AI-suggested goal", quadrant.id, suggestion.brand);
+     toast({
+      title: "Goal Added!",
+      description: `"${suggestion.goal}" has been added to your ${quadrant.title} goals.`,
+    });
+    setOpen(false);
+  };
+
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -109,23 +120,32 @@ export function GoalDialog({ quadrant }: GoalDialogProps) {
           </div>
           {loading && (
             <div className="space-y-2">
-              <Skeleton className="h-8 w-full" />
-              <Skeleton className="h-8 w-full" />
-              <Skeleton className="h-8 w-4/5" />
+              <Skeleton className="h-10 w-full" />
+              <Skeleton className="h-10 w-full" />
+              <Skeleton className="h-10 w-4/5" />
             </div>
           )}
           {suggestions.length > 0 && (
             <Card className="bg-secondary">
               <CardContent className="p-4 space-y-2">
                 <h4 className="font-semibold text-sm">Suggested Goals:</h4>
-                <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+                <div className="space-y-2">
                   {suggestions.map((suggestion, index) => (
-                    <li key={index}>
+                    <Button
+                      key={index}
+                      variant="ghost"
+                      size="sm"
+                      className="w-full justify-start h-auto text-left"
+                      onClick={() => handleAddSuggestedGoal(suggestion)}
+                    >
+                      <PlusCircle className="mr-2 h-4 w-4 flex-shrink-0" />
+                      <div>
                         {suggestion.goal}
-                        {suggestion.brand && <span className="font-semibold text-primary/80"> (with {suggestion.brand})</span>}
-                    </li>
+                        {suggestion.brand && <span className="font-semibold text-primary/80 ml-1"> (with {suggestion.brand})</span>}
+                      </div>
+                    </Button>
                   ))}
-                </ul>
+                </div>
               </CardContent>
             </Card>
           )}

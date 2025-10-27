@@ -23,7 +23,7 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 interface QuadrantCardProps {
   quadrant: Quadrant;
   goals: Goal[];
-  onAddGoal: (title: string, description: string, quadrantId: Quadrant['id']) => void;
+  onAddGoal: (title: string, description: string, quadrantId: Quadrant['id'], brand?: string) => void;
   onToggleGoal: (goalId: string) => void;
 }
 
@@ -70,7 +70,7 @@ export function QuadrantCard({ quadrant, goals, onAddGoal, onToggleGoal }: Quadr
         )}
       </CardContent>
       <CardFooter className="gap-2 pt-4">
-        <GoalDialog quadrant={quadrant} />
+        <GoalDialog quadrant={quadrant} onAddGoal={onAddGoal} />
         <AddGoalDialog quadrant={quadrant} onAddGoal={onAddGoal}>
             <Button variant="outline" size="sm">
             <Plus className="mr-2 h-4 w-4" /> Add Goal

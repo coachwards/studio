@@ -17,7 +17,7 @@ const initialQuadrants: Quadrant[] = [
 
 const mockGoals: Goal[] = [
     { id: '1', title: 'Run a 5k', quadrantId: 'health', completed: true, createdAt: '2024-05-10T10:00:00Z' },
-    { id: '2', title: 'Meditate 10 minutes daily', quadrantId: 'health', completed: false, createdAt: '2024-05-15T11:00:00Z' },
+    { id: '2', title: 'Meditate 10 minutes daily', quadrantId: 'health', completed: false, createdAt: '2024-05-15T11:00:00Z', brand: 'Yoga Centre' },
     { id: '3', title: 'Finish the Next.js course', quadrantId: 'work', completed: false, createdAt: '2024-05-20T14:30:00Z' },
     { id: '4', title: 'Update my portfolio', quadrantId: 'work', completed: false, createdAt: '2024-05-22T16:00:00Z' },
     { id: '5', title: 'Create a monthly budget', quadrantId: 'finance', completed: true, createdAt: '2024-05-01T09:00:00Z' },
@@ -28,7 +28,7 @@ const mockGoals: Goal[] = [
 export default function DashboardPage() {
     const [goals, setGoals] = useState<Goal[]>(mockGoals);
 
-    const handleAddGoal = (title: string, description: string, quadrantId: Quadrant['id']) => {
+    const handleAddGoal = (title: string, description: string, quadrantId: Quadrant['id'], brand?: string) => {
         const newGoal: Goal = {
             id: uuidv4(),
             title,
@@ -36,6 +36,7 @@ export default function DashboardPage() {
             quadrantId,
             completed: false,
             createdAt: new Date().toISOString(),
+            brand,
         };
         setGoals(prev => [...prev, newGoal]);
     };

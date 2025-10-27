@@ -23,6 +23,7 @@ export function GoalItem({ goal, onToggle }: GoalItemProps) {
                 data-completed={goal.completed}
             >
                 {goal.title}
+                {goal.brand && <span className="font-semibold text-primary/80 ml-1"> (with {goal.brand})</span>}
             </label>
         </div>
     );

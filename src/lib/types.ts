@@ -38,6 +38,7 @@ export type Goal = {
   completed: boolean;
   createdAt?: string;
   coachFeedback?: string;
+  brand?: string;
 };
 
 export type Icon = ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;

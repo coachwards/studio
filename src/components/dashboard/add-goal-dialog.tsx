@@ -21,7 +21,7 @@ import { Plus } from "lucide-react";
 interface AddGoalDialogProps {
   quadrant: Quadrant;
   children?: React.ReactNode;
-  onAddGoal: (title: string, description: string, quadrantId: Quadrant['id']) => void;
+  onAddGoal: (title: string, description: string, quadrantId: Quadrant['id'], brand?: string) => void;
 }
 
 export function AddGoalDialog({ quadrant, children, onAddGoal }: AddGoalDialogProps) {
