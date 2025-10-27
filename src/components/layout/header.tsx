@@ -3,8 +3,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Button } from '../ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import Link from 'next/link';
-import { SwotAnalysisDialog } from '../dashboard/swot-analysis-dialog';
-import { ScanLine } from 'lucide-react';
 
 const Header = () => {
     const userAvatar = PlaceHolderImages.find(image => image.id === 'user-avatar');
@@ -19,9 +17,9 @@ const Header = () => {
                           <path d="M168,40.7a96,96,0,1,0,0,174.6" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24"></path>
                           <path d="M88,40.7a96,96,0,1,1,0,174.6" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24"></path>
                         </svg>
-                        <span className="font-headline text-lg font-bold">Coachwards</span>
+                        <span className="font-headline text-lg font-bold">Loyalty Program</span>
                     </Link>
-                    <span className="text-sm text-muted-foreground hidden md:inline-block">Your Life, Rewarded</span>
+                    <span className="text-sm text-muted-foreground hidden md:inline-block">Your Brand, Rewarded</span>
                 </div>
                 <div className="flex flex-1 items-center justify-end space-x-2">
                     <DropdownMenu>
@@ -49,7 +47,7 @@ const Header = () => {
                                 <DropdownMenuItem>Profile</DropdownMenuItem>
                             </Link>
                              <Link href="/journal">
-                                <DropdownMenuItem>Journal</DropdownMenuItem>
+                                <DropdownMenuItem>Activity</DropdownMenuItem>
                             </Link>
                             <DropdownMenuItem>Settings</DropdownMenuItem>
                             <DropdownMenuSeparator />

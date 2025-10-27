@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'Coachwards',
-  description: 'Set goals, track progress, and earn rewards with your AI coach.',
+  title: 'Loyalty Rewards Program',
+  description: 'Engage with your favorite brands and earn rewards.',
 };
 
 export default function RootLayout({

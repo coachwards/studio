@@ -1,44 +1,21 @@
-import type { LucideProps } from 'lucide-react';
+import type { LucideIcon, LucideProps } from 'lucide-react';
 import type { ForwardRefExoticComponent, RefAttributes } from "react";
 
-export type QuadrantId = 'health' | 'work' | 'finance' | 'social';
-
-export type Quadrant = {
-  id: QuadrantId;
-  title: string;
-  icon: string;
+export type Activity = {
+  id: string;
+  type: 'purchase' | 'review' | 'referral' | 'reward';
   description: string;
-  progress?: number;
+  points: number;
+  date: string;
+  icon: LucideIcon;
 };
 
 export type Reward = {
   id: string;
   title: string;
-  description: string;
-  quadrant: Quadrant['id'];
-};
-
-export type NextSteps = {
-    opportunities: string;
-    targets: string;
-    nextSteps: string;
-}
-
-export type SwoAnalysis = {
-    opportunities: string;
-    targets: string;
-    personalizedInsights: string;
-};
-
-export type Goal = {
-  id: string;
-  title: string;
-  description?: string;
-  quadrantId: QuadrantId;
-  completed: boolean;
-  createdAt?: string;
-  coachFeedback?: string;
-  brand?: string;
+  category: string;
+  pointsRequired: number;
+  unlocked: boolean;
 };
 
 export type Icon = ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
