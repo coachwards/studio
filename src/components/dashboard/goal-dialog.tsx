@@ -19,6 +19,7 @@ import { useToast } from '@/hooks/use-toast';
 interface GoalDialogProps {
   quadrantTitle: string;
   onAddGoal: (title: string, quadrant: string, brand?: string) => void;
+  existingGoals: string[];
 }
 
 type SuggestedGoal = {
@@ -27,7 +28,7 @@ type SuggestedGoal = {
 };
 
 
-export const GoalDialog: React.FC<GoalDialogProps> = ({ quadrantTitle, onAddGoal }) => {
+export const GoalDialog: React.FC<GoalDialogProps> = ({ quadrantTitle, onAddGoal, existingGoals }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [suggestions, setSuggestions] = useState<SuggestedGoal[]>([]);
   const [loading, setLoading] = useState(false);
@@ -37,7 +38,7 @@ export const GoalDialog: React.FC<GoalDialogProps> = ({ quadrantTitle, onAddGoal
     setLoading(true);
     setSuggestions([]);
     try {
-      const result = await provideAiDrivenGoalSuggestions({ quadrant: quadrantTitle });
+      const result = await provideAiDrivenGoalSuggestions({ quadrant: quadrantTitle, existingGoals });
       setSuggestions(result.goals);
     } catch (error) {
       console.error('Failed to fetch AI suggestions:', error);
@@ -62,7 +63,7 @@ export const GoalDialog: React.FC<GoalDialogProps> = ({ quadrantTitle, onAddGoal
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="sm" className="h-7 gap-1">
+        <Button variant="ghost" size="sm" className="h-7 gap-1" onClick={handleFetchSuggestions}>
           <Sparkles className="h-4 w-4" />
           AI Suggestions
         </Button>
@@ -74,7 +75,7 @@ export const GoalDialog: React.FC<GoalDialogProps> = ({ quadrantTitle, onAddGoal
             AI Suggestions for {quadrantTitle}
           </DialogTitle>
           <DialogDescription>
-            Here are some AI-powered goal suggestions to get you started.
+            Here are some AI-powered goal suggestions based on your current goals.
           </DialogDescription>
         </DialogHeader>
         <div className="py-4 space-y-3">

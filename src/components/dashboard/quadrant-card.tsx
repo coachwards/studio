@@ -49,7 +49,11 @@ export function QuadrantCard({ quadrant, goals, onAddGoal, onToggleGoal, onDelet
             </CardContent>
             <Separator />
             <div className="p-4 flex justify-end">
-                <GoalDialog quadrantTitle={quadrant.title} onAddGoal={onAddGoal} />
+                <GoalDialog 
+                    quadrantTitle={quadrant.title} 
+                    onAddGoal={onAddGoal} 
+                    existingGoals={goals.map(g => g.title)} 
+                />
             </div>
         </Card>
     );
