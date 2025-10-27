@@ -5,8 +5,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
-import { Linkedin, Facebook, Instagram, UserPlus, Zap, ScanLine } from "lucide-react";
+import { Linkedin, Facebook, Instagram, UserPlus, Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { SwotAnalysisDialog } from "@/components/dashboard/swot-analysis-dialog";
 
 const suggestedCoaches = [
   { 
@@ -76,7 +77,10 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              <Button type="submit">Save Changes</Button>
+              <div className="flex justify-between items-center">
+                 <SwotAnalysisDialog />
+                 <Button type="submit">Save Changes</Button>
+              </div>
             </form>
           </CardContent>
         </Card>

@@ -1,34 +1,40 @@
 
-
+'use client';
+import { useState, useEffect } from 'react';
 import Header from "@/components/layout/header";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import type { Activity } from "@/lib/types";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import type { Goal } from "@/lib/types";
 import { format } from 'date-fns';
-import { Gift, ShoppingCart, Star } from "lucide-react";
+import { CheckCircle2, Circle, MessageSquare, User } from "lucide-react";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
 
-// Mock data
-const mockActivities: Activity[] = [
-    { id: '1', type: 'purchase', description: 'Made a purchase of $50', points: 50, date: '2024-05-28T10:00:00Z', icon: ShoppingCart },
-    { id: '2', type: 'review', description: 'Left a product review', points: 20, date: '2024-05-27T15:30:00Z', icon: Star },
-    { id: '3', type: 'reward', description: 'Redeemed "Free Coffee"', points: -100, date: '2024-05-26T11:00:00Z', icon: Gift },
-    { id: '4', type: 'purchase', description: 'Made a purchase of $120', points: 120, date: '2024-05-25T09:15:00Z', icon: ShoppingCart },
-    { id: '5', type: 'purchase', description: 'Made a purchase of $75', points: 75, date: '2024-05-24T14:00:00Z', icon: ShoppingCart },
-    { id: '6', type: 'review', description: 'Reviewed your recent purchase', points: 20, date: '2024-05-23T18:00:00Z', icon: Star },
+
+const mockGoals: Goal[] = [
+    { id: '1', title: 'Meditate for 10 minutes daily', quadrant: 'Health & Wellness', completed: true, createdAt: '2024-05-28T10:00:00Z', brand: 'Yoga Centre', coachFeedback: 'Great job on maintaining consistency! Try to increase to 15 minutes next week.' },
+    { id: '2', title: 'Update resume', quadrant: 'Career & Work', completed: true, createdAt: '2024-05-27T15:30:00Z' },
+    { id: '3', title: 'Read one chapter of a finance book', quadrant: 'Finance & Investment', completed: false, createdAt: '2024-05-27T11:00:00Z' },
+    { id: '4', title: 'Go for a 30-minute walk', quadrant: 'Health & Wellness', completed: true, createdAt: '2024-05-26T09:15:00Z', coachFeedback: 'Excellent work staying active. How did you feel after the walk?' },
+    { id: '5', title: 'Attend a networking event', quadrant: 'Social & Relationships', completed: false, createdAt: '2024-05-25T14:00:00Z' },
 ];
 
 
-export default function ActivityLogPage() {
-  // Group activities by date
-  const groupedActivities = mockActivities
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .reduce((acc, activity) => {
-      const date = format(new Date(activity.date), 'MMMM d, yyyy');
+export default function JournalPage() {
+  const [goals, setGoals] = useState<Goal[]>(mockGoals);
+  const coachAvatar = PlaceHolderImages.find(image => image.id === 'coach-avatar');
+
+  // Group goals by date
+  const groupedGoals = goals
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .reduce((acc, goal) => {
+      const date = format(new Date(goal.createdAt), 'MMMM d, yyyy');
       if (!acc[date]) {
         acc[date] = [];
       }
-      acc[date].push(activity);
+      acc[date].push(goal);
       return acc;
-    }, {} as Record<string, Activity[]>);
+    }, {} as Record<string, Goal[]>);
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
@@ -36,30 +42,40 @@ export default function ActivityLogPage() {
       <main className="flex-1 p-4 md:p-8 flex flex-col items-center gap-8">
         <Card className="w-full max-w-3xl">
           <CardHeader>
-            <CardTitle className="font-headline text-3xl">My Activity</CardTitle>
-            <CardDescription>A log of all your points and rewards activity.</CardDescription>
+            <CardTitle className="font-headline text-3xl">My Journal</CardTitle>
+            <CardDescription>A log of all your goals and progress.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-8">
-            {Object.keys(groupedActivities).map(date => (
+            {Object.keys(groupedGoals).map(date => (
               <div key={date}>
                 <h3 className="text-lg font-semibold text-muted-foreground mb-4 sticky top-16 bg-background/95 py-2 backdrop-blur-sm z-10">
                   {date}
                 </h3>
-                <div className="space-y-4">
-                  {groupedActivities[date].map(activity => (
-                    <div key={activity.id} className="flex items-center gap-4 p-3 bg-secondary/50 rounded-lg">
-                        <div className={`p-2 rounded-full bg-primary/10 ${activity.points > 0 ? 'text-primary' : 'text-accent'}`}>
-                            <activity.icon className="h-5 w-5" />
-                        </div>
+                <div className="space-y-6">
+                  {groupedGoals[date].map(goal => (
+                    <div key={goal.id} className="flex flex-col gap-3">
+                      <div className="flex items-center gap-4">
+                        {goal.completed ? <CheckCircle2 className="h-5 w-5 text-green-500" /> : <Circle className="h-5 w-5 text-muted-foreground" />}
                         <div className="flex-grow">
-                            <p className="font-medium text-foreground">{activity.description}</p>
-                            <p className="text-sm text-muted-foreground">
-                                {format(new Date(activity.date), "h:mm a")}
+                            <p className={`font-medium ${goal.completed ? 'line-through text-muted-foreground' : 'text-foreground'}`}>
+                                {goal.title}
+                                {goal.brand && <span className="text-primary font-semibold ml-2">({goal.brand})</span>}
                             </p>
+                            <p className="text-sm text-muted-foreground">{goal.quadrant}</p>
                         </div>
-                        <div className={`font-semibold ${activity.points > 0 ? 'text-green-500' : 'text-red-500'}`}>
-                            {activity.points > 0 ? `+${activity.points}` : activity.points} pts
+                      </div>
+                      {goal.coachFeedback && (
+                        <div className="flex items-start gap-4 pl-9">
+                          <Avatar className="h-8 w-8 border-2 border-accent">
+                            {coachAvatar && <AvatarImage src={coachAvatar.imageUrl} alt={coachAvatar.description} />}
+                            <AvatarFallback>C</AvatarFallback>
+                          </Avatar>
+                          <div className="bg-secondary/50 p-3 rounded-lg flex-1">
+                            <p className="text-sm font-semibold text-accent-foreground/90">Coach Feedback</p>
+                            <p className="text-sm text-secondary-foreground">{goal.coachFeedback}</p>
+                          </div>
                         </div>
+                      )}
                     </div>
                   ))}
                 </div>

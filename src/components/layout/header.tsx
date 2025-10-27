@@ -1,3 +1,4 @@
+import { SwotAnalysisDialog } from '@/components/dashboard/swot-analysis-dialog';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Button } from '../ui/button';
@@ -17,11 +18,14 @@ const Header = () => {
                           <path d="M168,40.7a96,96,0,1,0,0,174.6" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24"></path>
                           <path d="M88,40.7a96,96,0,1,1,0,174.6" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24"></path>
                         </svg>
-                        <span className="font-headline text-lg font-bold">Loyalty Program</span>
+                        <span className="font-headline text-lg font-bold">Coachwards</span>
                     </Link>
-                    <span className="text-sm text-muted-foreground hidden md:inline-block">Your Brand, Rewarded</span>
+                    <span className="text-sm text-muted-foreground hidden md:inline-block">Your AI Coaching Copilot</span>
                 </div>
                 <div className="flex flex-1 items-center justify-end space-x-2">
+                    <div className="hidden md:block">
+                        <SwotAnalysisDialog />
+                    </div>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="ghost" className="relative h-10 w-10 rounded-full">
@@ -47,7 +51,7 @@ const Header = () => {
                                 <DropdownMenuItem>Profile</DropdownMenuItem>
                             </Link>
                              <Link href="/journal">
-                                <DropdownMenuItem>Activity</DropdownMenuItem>
+                                <DropdownMenuItem>Journal</DropdownMenuItem>
                             </Link>
                             <DropdownMenuItem>Settings</DropdownMenuItem>
                             <DropdownMenuSeparator />
