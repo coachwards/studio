@@ -4,42 +4,35 @@
  * @fileOverview An AI flow that provides goal suggestions for a specific life quadrant.
  *
  * - provideAiDrivenGoalSuggestions - A function that returns AI-generated goal suggestions.
- * - GoalSuggestionsInput - The input type for the flow.
- * - GoalSuggestionsOutput - The return type for the flow.
  */
 
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 
-export const GoalSuggestionsInputSchema = z.object({
+const GoalSuggestionsInputSchema = z.object({
   quadrant: z.string().describe('The life quadrant for which to suggest goals (e.g., "Health & Wellness").'),
 });
 export type GoalSuggestionsInput = z.infer<typeof GoalSuggestionsInputSchema>;
-
 
 const GoalSuggestionSchema = z.object({
     goal: z.string().describe("The suggested goal, as a concise, actionable statement."),
     brand: z.string().optional().describe("An optional real-world company, app, or service that could help with this goal (e.g., 'Yoga Centre', 'Fidelity').")
 });
 
-export const GoalSuggestionsOutputSchema = z.object({
+const GoalSuggestionsOutputSchema = z.object({
   goals: z.array(GoalSuggestionSchema).describe('An array of 3 to 5 goal suggestions.'),
 });
 export type GoalSuggestionsOutput = z.infer<typeof GoalSuggestionsOutputSchema>;
 
-
 export async function provideAiDrivenGoalSuggestions(input: GoalSuggestionsInput): Promise<GoalSuggestionsOutput> {
-  return goalSuggestionFlow(input);
-}
-
-const goalSuggestionFlow = ai.defineFlow(
-  {
-    name: 'goalSuggestionFlow',
-    inputSchema: GoalSuggestionsInputSchema,
-    outputSchema: GoalSuggestionsOutputSchema,
-  },
-  async (input) => {
-    const prompt = `
+  const goalSuggestionFlow = ai.defineFlow(
+    {
+      name: 'goalSuggestionFlow',
+      inputSchema: GoalSuggestionsInputSchema,
+      outputSchema: GoalSuggestionsOutputSchema,
+    },
+    async (input) => {
+      const prompt = `
       You are an expert life coach. A user needs suggestions for goals in the following area of their life: "${input.quadrant}".
 
       Generate a list of 3 to 5 specific, actionable goals for this quadrant.
@@ -48,12 +41,15 @@ const goalSuggestionFlow = ai.defineFlow(
       Return the response in the specified JSON format.
     `;
 
-    const { output } = await ai.generate({
-      prompt,
-      output: { schema: GoalSuggestionsOutputSchema },
-      model: 'googleai/gemini-2.5-flash',
-    });
+      const { output } = await ai.generate({
+        prompt,
+        output: { schema: GoalSuggestionsOutputSchema },
+        model: 'googleai/gemini-2.5-flash',
+      });
 
-    return output!;
-  }
-);
+      return output!;
+    }
+  );
+
+  return goalSuggestionFlow(input);
+}
