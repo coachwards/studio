@@ -20,6 +20,10 @@ import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 
+interface BrandedGoal {
+    goal: string;
+    brand?: string;
+}
 interface GoalDialogProps {
   quadrant: Quadrant;
 }
@@ -27,7 +31,7 @@ interface GoalDialogProps {
 export function GoalDialog({ quadrant }: GoalDialogProps) {
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState("");
-  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [suggestions, setSuggestions] = useState<BrandedGoal[]>([]);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
@@ -115,8 +119,11 @@ export function GoalDialog({ quadrant }: GoalDialogProps) {
               <CardContent className="p-4 space-y-2">
                 <h4 className="font-semibold text-sm">Suggested Goals:</h4>
                 <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-                  {suggestions.map((goal, index) => (
-                    <li key={index}>{goal}</li>
+                  {suggestions.map((suggestion, index) => (
+                    <li key={index}>
+                        {suggestion.goal}
+                        {suggestion.brand && <span className="font-semibold text-primary/80"> (with {suggestion.brand})</span>}
+                    </li>
                   ))}
                 </ul>
               </CardContent>
