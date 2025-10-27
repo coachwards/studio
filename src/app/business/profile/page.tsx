@@ -19,17 +19,20 @@ const initialQuadrants: Quadrant[] = [
     { id: 'social', title: 'Social & Relationships', icon: Users, color: 'text-yellow-400' },
 ];
 
+const rewardTypes = ['Voucher', 'Credits', 'Cash-back', 'Discount', 'Product'];
+
 export default function BusinessProfilePage() {
   const [companyName, setCompanyName] = useState('');
   const [productName, setProductName] = useState('');
   const [description, setDescription] = useState('');
   const [quadrant, setQuadrant] = useState('');
   const [website, setWebsite] = useState('');
+  const [rewardType, setRewardType] = useState('');
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!companyName || !productName || !description || !quadrant || !website) {
+    if (!companyName || !productName || !description || !quadrant || !website || !rewardType) {
       toast({
         variant: "destructive",
         title: "Incomplete Profile",
@@ -38,7 +41,7 @@ export default function BusinessProfilePage() {
       return;
     }
     // Here you would typically send the data to your backend
-    console.log({ companyName, productName, description, quadrant, website });
+    console.log({ companyName, productName, description, quadrant, website, rewardType });
     toast({
       title: "Profile Submitted!",
       description: "Thank you for submitting your product profile. It will be reviewed shortly.",
@@ -91,6 +94,22 @@ export default function BusinessProfilePage() {
                 <div className="space-y-2">
                   <Label htmlFor="website">Website</Label>
                   <Input id="website" type="url" value={website} onChange={e => setWebsite(e.target.value)} placeholder="https://example.com" />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 <div className="space-y-2">
+                    <Label htmlFor="rewardType">Reward Type</Label>
+                    <Select onValueChange={setRewardType} value={rewardType}>
+                        <SelectTrigger>
+                        <SelectValue placeholder="Select a reward type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                        {rewardTypes.map(type => (
+                            <SelectItem key={type} value={type}>{type}</SelectItem>
+                        ))}
+                        </SelectContent>
+                    </Select>
                 </div>
               </div>
               
