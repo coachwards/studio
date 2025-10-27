@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Button } from '../ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import Link from 'next/link';
+import { Separator } from '../ui/separator';
 
 const Header = () => {
     const userAvatar = PlaceHolderImages.find(image => image.id === 'user-avatar');
@@ -21,6 +22,8 @@ const Header = () => {
                         </svg>
                         <span className="font-headline text-lg font-bold">Coachwards</span>
                     </Link>
+                    <Separator orientation="vertical" className="h-6" />
+                    <p className="ml-4 text-sm text-muted-foreground">Your life, rewarded</p>
                 </div>
                 <div className="flex flex-1 items-center justify-center">
                     <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
