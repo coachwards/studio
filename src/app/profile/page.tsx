@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Linkedin, Facebook, Instagram, UserPlus, Zap, ScanLine } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { SwotAnalysisDialog } from "@/components/dashboard/swot-analysis-dialog";
 
 const suggestedCoaches = [
   { 
@@ -76,13 +75,6 @@ export default function ProfilePage() {
                   <Input id="instagram" placeholder="https://instagram.com/..." className="pl-10" />
                 </div>
               </div>
-              
-              <SwotAnalysisDialog>
-                <Button variant="outline" className="w-full">
-                    <ScanLine className="mr-2 h-4 w-4" />
-                    User Analysis
-                </Button>
-              </SwotAnalysisDialog>
 
               <Button type="submit">Save Changes</Button>
             </form>
