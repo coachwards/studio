@@ -27,7 +27,7 @@ const Header = () => {
                 </div>
                 <div className="flex flex-1 items-center justify-center">
                     <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
-                       <Link href="/business/profile" className="text-muted-foreground transition-colors hover:text-foreground">
+                       <Link href="/business/profile" className="text-green-500 transition-colors hover:text-green-600 font-semibold">
                             For Business
                         </Link>
                     </nav>
