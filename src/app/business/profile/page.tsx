@@ -24,6 +24,8 @@ const rewardTypes = ['Voucher', 'Credits', 'Cash-back', 'Discount', 'Product'];
 export default function BusinessProfilePage() {
   const [companyName, setCompanyName] = useState('');
   const [productName, setProductName] = useState('');
+  const [contactName, setContactName] = useState('');
+  const [businessEmail, setBusinessEmail] = useState('');
   const [description, setDescription] = useState('');
   const [quadrant, setQuadrant] = useState('');
   const [website, setWebsite] = useState('');
@@ -32,7 +34,7 @@ export default function BusinessProfilePage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!companyName || !productName || !description || !quadrant || !website || !rewardType) {
+    if (!companyName || !productName || !description || !quadrant || !website || !rewardType || !contactName || !businessEmail) {
       toast({
         variant: "destructive",
         title: "Incomplete Profile",
@@ -41,7 +43,7 @@ export default function BusinessProfilePage() {
       return;
     }
     // Here you would typically send the data to your backend
-    console.log({ companyName, productName, description, quadrant, website, rewardType });
+    console.log({ companyName, productName, contactName, businessEmail, description, quadrant, website, rewardType });
     toast({
       title: "Profile Submitted!",
       description: "Thank you for submitting your product profile. It will be reviewed shortly.",
@@ -69,6 +71,17 @@ export default function BusinessProfilePage() {
                 <div className="space-y-2">
                   <Label htmlFor="productName">Product/Service Name</Label>
                   <Input id="productName" value={productName} onChange={e => setProductName(e.target.value)} placeholder="e.g., Mindful Moments App" />
+                </div>
+              </div>
+
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="contactName">Contact Name</Label>
+                  <Input id="contactName" value={contactName} onChange={e => setContactName(e.target.value)} placeholder="e.g., Alex Doe" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="businessEmail">Business Email</Label>
+                  <Input id="businessEmail" type="email" value={businessEmail} onChange={e => setBusinessEmail(e.target.value)} placeholder="e.g., contact@mindfulness.com" />
                 </div>
               </div>
 
