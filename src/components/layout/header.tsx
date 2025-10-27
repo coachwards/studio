@@ -20,7 +20,11 @@ const Header = () => {
                         </svg>
                         <span className="font-headline text-lg font-bold">Coachwards</span>
                     </Link>
-                    <span className="text-sm text-muted-foreground hidden md:inline-block">Your AI Coaching Copilot</span>
+                    <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
+                       <Link href="/business/profile" className="text-muted-foreground transition-colors hover:text-foreground">
+                            For Business
+                        </Link>
+                    </nav>
                 </div>
                 <div className="flex flex-1 items-center justify-end space-x-2">
                     <div className="hidden md:block">

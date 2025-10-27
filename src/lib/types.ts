@@ -8,7 +8,7 @@ export type Quadrant = {
 };
 
 export type Goal = {
-  id: string;
+  id:string;
   title: string;
   quadrant: string;
   completed: boolean;
@@ -23,3 +23,13 @@ export type SWOTAnalysis = {
     opportunities: string[];
     threats: string[];
 }
+
+export type ProductProfile = {
+  id: string;
+  companyName: string;
+  productName: string;
+  description: string;
+  quadrant: string;
+  website: string;
+  logoUrl?: string;
+};
