@@ -6,7 +6,8 @@ import { QuadrantCard } from "@/components/dashboard/quadrant-card";
 import { AddGoalDialog } from "@/components/dashboard/add-goal-dialog";
 import { NextStepsDialog } from "@/components/dashboard/next-steps-dialog";
 import type { Goal, Quadrant } from "@/lib/types";
-import { Dna, HeartPulse, Briefcase, Landmark, Users } from 'lucide-react';
+import { HeartPulse, Briefcase, Landmark, Users } from 'lucide-react';
+import { RewardsPanel } from '@/components/dashboard/rewards-panel';
 
 const initialQuadrants: Quadrant[] = [
     { id: 'health', title: 'Health & Wellness', icon: HeartPulse, color: 'text-red-400' },
@@ -75,6 +76,9 @@ export default function DashboardPage() {
                             onDeleteGoal={handleDeleteGoal}
                         />
                     ))}
+                </div>
+                <div className="pt-8">
+                    <RewardsPanel />
                 </div>
             </main>
         </div>
