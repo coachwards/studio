@@ -57,7 +57,7 @@ export const SwotAnalysisDialog: React.FC = () => {
       <DialogTrigger asChild>
         <Button variant="outline">
           <ScanLine className="mr-2" />
-          User Analysis
+          Personal Goals Analyser
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-2xl">
