@@ -6,6 +6,7 @@ import { Button } from '../ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import Link from 'next/link';
 import { Separator } from '../ui/separator';
+import { ChevronDown } from 'lucide-react';
 
 const Header = () => {
     const userAvatar = PlaceHolderImages.find(image => image.id === 'user-avatar');
@@ -27,17 +28,27 @@ const Header = () => {
                 </div>
                 <div className="flex flex-1 items-center justify-center">
                     <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
-                       <Link href="/business/profile" className="text-green-500 transition-colors hover:text-green-600 font-semibold">
+                       <DropdownMenu>
+                        <DropdownMenuTrigger className="flex items-center gap-1 text-green-500 transition-colors hover:text-green-600 font-semibold focus:outline-none">
                             For Business
-                        </Link>
-                        <Link href="/coaches/profile" className="text-blue-500 transition-colors hover:text-blue-600 font-semibold">
-                            For Coaches
-                        </Link>
+                            <ChevronDown className="h-4 w-4" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <Link href="/business/profile">
+                                <DropdownMenuItem>Product/Service Profile</DropdownMenuItem>
+                            </Link>
+                            <Link href="/coaches/profile">
+                                <DropdownMenuItem>Coach Profile</DropdownMenuItem>
+                            </Link>
+                        </DropdownMenuContent>
+                       </DropdownMenu>
                     </nav>
                 </div>
                 <div className="flex items-center justify-end space-x-2">
                     <div className="hidden md:block">
-                        <SwotAnalysisDialog />
+                        <Button variant="outline" asChild>
+                           <Link href="/profile/page.tsx">Personal Goals Analyser</Link>
+                        </Button>
                     </div>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
