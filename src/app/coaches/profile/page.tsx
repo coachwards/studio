@@ -22,14 +22,14 @@ const initialQuadrants: Quadrant[] = [
 export default function CoachProfilePage() {
   const [coachName, setCoachName] = useState('');
   const [email, setEmail] = useState('');
-  const [specialty, setSpecialty] = useState('');
+  const [quadrant, setQuadrant] = useState('');
   const [bio, setBio] = useState('');
   const [website, setWebsite] = useState('');
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!coachName || !email || !specialty || !bio) {
+    if (!coachName || !email || !quadrant || !bio) {
       toast({
         variant: "destructive",
         title: "Incomplete Profile",
@@ -38,7 +38,7 @@ export default function CoachProfilePage() {
       return;
     }
     // Here you would typically send the data to your backend
-    console.log({ coachName, email, specialty, bio, website });
+    console.log({ coachName, email, quadrant, bio, website });
     toast({
       title: "Profile Submitted!",
       description: "Thank you for submitting your coach profile. It will be reviewed shortly.",
@@ -70,8 +70,8 @@ export default function CoachProfilePage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="specialty">Specialty</Label>
-                <Select onValueChange={setSpecialty} value={specialty}>
+                <Label htmlFor="quadrant">Coaching Quadrant</Label>
+                <Select onValueChange={setQuadrant} value={quadrant}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select your coaching specialty" />
                   </SelectTrigger>
