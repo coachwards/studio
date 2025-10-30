@@ -30,9 +30,6 @@ const Header = () => {
                        <Link href="/business/profile" className="text-green-500 transition-colors hover:text-green-600 font-semibold">
                             For Business
                         </Link>
-                        <Link href="/business/dashboard" className="text-green-500 transition-colors hover:text-green-600 font-semibold">
-                            Business Dashboard
-                        </Link>
                         <Link href="/coaches/profile" className="text-blue-500 transition-colors hover:text-blue-600 font-semibold">
                             For Coaches
                         </Link>
@@ -68,6 +65,9 @@ const Header = () => {
                             </Link>
                              <Link href="/journal">
                                 <DropdownMenuItem>Journal</DropdownMenuItem>
+                            </Link>
+                             <Link href="/business/dashboard">
+                                <DropdownMenuItem>Business Dashboard</DropdownMenuItem>
                             </Link>
                             <DropdownMenuItem>Settings</DropdownMenuItem>
                             <DropdownMenuSeparator />
