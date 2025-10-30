@@ -1,12 +1,13 @@
 
-import { SwotAnalysisDialog } from '@/components/dashboard/swot-analysis-dialog';
+import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { Button } from '../ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import Link from 'next/link';
 import { Separator } from '../ui/separator';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, ScanLine } from 'lucide-react';
+import { SwotAnalysisDialog } from '../dashboard/swot-analysis-dialog';
+
 
 const Header = () => {
     const userAvatar = PlaceHolderImages.find(image => image.id === 'user-avatar');
@@ -24,7 +25,7 @@ const Header = () => {
                         <span className="font-headline text-lg font-bold">Coachwards</span>
                     </Link>
                     <Separator orientation="vertical" className="h-6" />
-                    <p className="ml-4 text-sm text-muted-foreground">Your life, rewarded</p>
+                    <p className="ml-4 text-sm font-semibold text-accent">Your life, rewarded</p>
                 </div>
                 <div className="flex flex-1 items-center justify-center">
                     <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
@@ -37,7 +38,7 @@ const Header = () => {
                             <Link href="/business/profile">
                                 <DropdownMenuItem>Product/Service Profile</DropdownMenuItem>
                             </Link>
-                            <Link href="/coaches/profile">
+                             <Link href="/coaches/profile">
                                 <DropdownMenuItem>Coach Profile</DropdownMenuItem>
                             </Link>
                         </DropdownMenuContent>
@@ -46,7 +47,10 @@ const Header = () => {
                 </div>
                 <div className="flex items-center justify-end space-x-2">
                     <div className="hidden md:block">
-                        <SwotAnalysisDialog />
+                       <Button variant="outline">
+                         <ScanLine className="mr-2" />
+                         Personal Goals Analyser
+                       </Button>
                     </div>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
