@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import Link from 'next/link';
 import { Separator } from '../ui/separator';
-import { ChevronDown, ScanLine } from 'lucide-react';
+import { ChevronDown, Trophy } from 'lucide-react';
 import { SwotAnalysisDialog } from '../dashboard/swot-analysis-dialog';
 
 
@@ -17,11 +17,7 @@ const Header = () => {
             <div className="container flex h-16 max-w-screen-2xl items-center">
                 <div className="mr-4 flex items-center">
                     <Link href="/" className="mr-6 flex items-center space-x-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" className="h-6 w-6 text-primary">
-                          <rect width="256" height="256" fill="none"></rect>
-                          <path d="M168,40.7a96,96,0,1,0,0,174.6" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24"></path>
-                          <path d="M88,40.7a96,96,0,1,1,0,174.6" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24"></path>
-                        </svg>
+                        <Trophy className="h-6 w-6 text-primary" />
                         <span className="font-headline text-lg font-bold">Coachwards</span>
                     </Link>
                     <Separator orientation="vertical" className="h-6" />
@@ -30,7 +26,7 @@ const Header = () => {
                 <div className="flex flex-1 items-center justify-center">
                     <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
                        <DropdownMenu>
-                        <DropdownMenuTrigger className="flex items-center gap-1 text-green-500 transition-colors hover:text-green-600 font-semibold focus:outline-none">
+                        <DropdownMenuTrigger className="flex items-center gap-1 font-semibold text-foreground transition-colors hover:text-foreground/80 focus:outline-none">
                             For Business
                             <ChevronDown className="h-4 w-4" />
                         </DropdownMenuTrigger>
@@ -47,8 +43,7 @@ const Header = () => {
                 </div>
                 <div className="flex items-center justify-end space-x-2">
                     <div className="hidden md:block">
-                       <Button variant="outline">
-                         <ScanLine className="mr-2" />
+                       <Button variant="secondary">
                          Personal Goals Analyser
                        </Button>
                     </div>

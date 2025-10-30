@@ -12,7 +12,7 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Bot, ScanLine } from 'lucide-react';
+import { Bot } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { runSwotAnalysis } from '@/ai/flows/run-swot-analysis';
@@ -55,8 +55,7 @@ export const SwotAnalysisDialog: React.FC = () => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button>
-          <ScanLine className="mr-2" />
+        <Button variant="secondary">
           Personal Goals Analyser
         </Button>
       </DialogTrigger>
