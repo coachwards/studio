@@ -69,6 +69,9 @@ const Header = () => {
                              <Link href="/business/dashboard">
                                 <DropdownMenuItem>Business Dashboard</DropdownMenuItem>
                             </Link>
+                             <Link href="/coaches/dashboard">
+                                <DropdownMenuItem>Coach Dashboard</DropdownMenuItem>
+                            </Link>
                             <DropdownMenuItem>Settings</DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>Log out</DropdownMenuItem>
