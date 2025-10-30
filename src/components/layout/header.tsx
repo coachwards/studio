@@ -30,6 +30,9 @@ const Header = () => {
                        <Link href="/business/profile" className="text-green-500 transition-colors hover:text-green-600 font-semibold">
                             For Business
                         </Link>
+                        <Link href="/business/dashboard" className="text-green-500 transition-colors hover:text-green-600 font-semibold">
+                            Business Dashboard
+                        </Link>
                         <Link href="/coaches/profile" className="text-blue-500 transition-colors hover:text-blue-600 font-semibold">
                             For Coaches
                         </Link>
