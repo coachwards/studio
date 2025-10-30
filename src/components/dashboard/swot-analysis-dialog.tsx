@@ -55,7 +55,7 @@ export const SwotAnalysisDialog: React.FC = () => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">
+        <Button>
           <ScanLine className="mr-2" />
           Personal Goals Analyser
         </Button>

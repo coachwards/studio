@@ -46,9 +46,7 @@ const Header = () => {
                 </div>
                 <div className="flex items-center justify-end space-x-2">
                     <div className="hidden md:block">
-                        <Button variant="outline" asChild>
-                           <Link href="/profile/page.tsx">Personal Goals Analyser</Link>
-                        </Button>
+                        <SwotAnalysisDialog />
                     </div>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
